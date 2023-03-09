@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const userRoutes = require('../routes/user.route');
+const productRoutes = require('../routes/product.route');
+const cartRoutes = require('../routes/cart.route');
 const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
 
 const app = express();
@@ -11,6 +13,8 @@ app.use(cors());
 app.use('/images', express.static('public'));
 
 app.use('/user', userRoutes);
+app.use('/product', productRoutes);
+app.use('/cart', cartRoutes);
 
 app.use(httpErrorMiddleware);
 
