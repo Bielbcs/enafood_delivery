@@ -20,4 +20,15 @@ const insert = async (prodId, userId, quantity) => {
   return newCart;
 }
 
-module.exports = { insert };
+const addQuantity = async (prodId, userId, quantity) => {
+  await Cart.updateOne(
+    { user_id: userId, 'products._id': prodId },
+    { $set: { 'products.$.quantity': quantity } }
+  );
+
+  const updatedCart = await Cart.findOne({ user_id: userId });
+
+  return updatedCart;
+}
+
+module.exports = { insert, addQuantity };
