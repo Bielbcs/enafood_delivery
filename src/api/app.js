@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const userRoutes = require('../routes/user.route');
+const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
 
 const app = express();
 
@@ -8,6 +10,8 @@ app.use(cors());
 
 app.use('/images', express.static('public'));
 
-app.get('/', (_req, res) => res.json('Tudo funcionando!'));
+app.use('/user', userRoutes);
+
+app.use(httpErrorMiddleware);
 
 module.exports = app;
