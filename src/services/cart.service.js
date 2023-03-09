@@ -2,7 +2,13 @@ const Cart = require('../models/cart.model');
 const Product = require('../models/products.model');
 const HttpException = require('../utils/HttpException');
 
-const insert = async (prodId, userId, quantity) => {
+const get = async (id) => {
+  const cart = await Cart.findOne({ user_id: id });
+
+  return cart;
+}
+
+const insert = async (prodId, userId) => {
   const cart = await Cart.findOne({user_id: userId});
   const product = await Product.findOne({ _id: prodId }).select('-__v');
   const { products } = cart;
@@ -31,4 +37,14 @@ const addQuantity = async (prodId, userId, quantity) => {
   return updatedCart;
 }
 
-module.exports = { insert, addQuantity };
+const remove = async (prodId, userId) => {
+  const result = await Cart.findOneAndUpdate(
+    { user_id: userId },
+    { $pull: { products: { _id: prodId } } },
+    { new: true }
+  )
+  
+  return result;
+}
+
+module.exports = { get, insert, addQuantity, remove };
