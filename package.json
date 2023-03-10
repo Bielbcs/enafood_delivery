@@ -4,6 +4,7 @@
   "description": "API de Delivery Enafood",
   "main": "index.js",
   "scripts": {
+    "test": "mocha src/tests/**/*.test.js --exit",
     "dev": "nodemon ./src/api/server.js"
   },
   "repository": {
@@ -18,7 +19,6 @@
   },
   "homepage": "https://github.com/Bielbcs/enafood_delivery#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.8.3",
@@ -27,6 +27,10 @@
     "mongoose": "^7.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.21",
+    "sinon": "^15.0.1"
   }
 }

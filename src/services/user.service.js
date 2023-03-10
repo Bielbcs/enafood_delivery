@@ -4,19 +4,16 @@ const md5 = require('md5');
 const HttpException = require('../utils/HttpException');
 
 const insert = async (data) => {
-  const { email } = data;
   const pass = md5(data.password);
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: data.email });
   if (user) throw new HttpException(404, 'Usuário já existe');
 
-  await User.create({ ...data, password: pass });
+  const { _id, username, email } = await User.create({ ...data, password: pass });
 
-  const createdUser = await User.findOne({ email });
+  await Cart.create({ user_id: _id, products: [] });
 
-  await Cart.create({ user_id: createdUser._id, products: [] });
-
-  return createdUser;
+  return { _id, username, email };
 }
 
 const getUser = async (data) => {

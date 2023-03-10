@@ -25,9 +25,6 @@ mongoose.connection.once('open', async () => {
   } catch (err) {
     console.error(err);
   }
-
-  // Encerra a conexão
-  mongoose.connection.close();
 });
 
 module.exports = db;

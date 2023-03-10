@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
-const jwtKey = process.env.SECRET_KEY;
+const jwtKey = process.env.SECRET_KEY || 'secret_key';
 
 const createToken = (userBody) => {
   const { password, ...rest } = userBody;
   const token = jwt.sign(
     rest,
     jwtKey,
-    { algorithm: 'HS256', expiresIn: '1d' },
+    { expiresIn: '1d' },
   );
 
   return token;
