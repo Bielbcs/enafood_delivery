@@ -15,8 +15,8 @@ Um sistema de Delivery onde a API deve: Retornar todos os produtos disponiveis, 
   <b>- NodeJs</b>: Tecnologia base do projeto, é o que permite a execução de JavaScript fora de um navegador web.</br></br>
   <b>- ExpressJs</b>: É o framework que facilita a criação da API, pois já vem com muitas funcionalidades prontas. Foi optado pelo uso do Express pois sua utilização é mais simples e ideal para pequenos projetos.</br></br>
   <b>- Mongoose</b>: É um ODM (Object Data Modeling) para MongoDB, que foi responsável por fazer a conexão entre o banco Mongo e o restante da aplicação.</br></br>
-  <b>- Docker</b>: Docker foi utilizado para a criação do container do banco MongoDB, caso quem queira executar o projeto não o tenha baixado.</br></br>
-  <b>- Json Web Token</b>: Jwt foi utilizado para fazer a validação de usuário, todas as rotas exceto as rotas de cadastro e registro, exigem que um token esteja presente nos headers da requisição.</br></br>
+  <b>- Docker</b>: Docker foi utilizado para a criação do container do banco de dados, caso quem queira executar o projeto não o tenha baixado.</br></br>
+  <b>- Json Web Token</b>: Jwt foi utilizado para fazer a validação de usuário, todas as rotas exceto as rotas de cadastro e login, exigem que um token esteja presente nos headers da requisição.</br></br>
   <b>- Dotenv</b>: Foi utilizada para que seja possível utilizar as variáveis de ambiente presentes no arquivo `.env`</br></br>
   <b>- Mocha</b>: Mocha é o responsável por executar os testes de integração feitos para o projeto.</br></br>
   <b>- Chai</b>: Chai é a biblioteca responsável pela asserção dos testes, é utilizado em conjunto com o Mocha.</br></br>
