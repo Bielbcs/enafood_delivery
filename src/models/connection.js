@@ -3,8 +3,8 @@ const INITIAL_PRODUCTS = require('../../seeder');
 const Product = require('../models/products.model');
 require('dotenv/config');
 
-const DB_HOST = process.env.DB_HOST || localhost;
-const DB_PORT = process.env.DB_PORT || 27017;
+const DB_HOST = process.env.DB_HOST || 'localhost';
+const DB_PORT = process.env.DB_PORT || '27017';
 
 const db = async () => await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/enafood`);
 

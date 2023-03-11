@@ -4,6 +4,7 @@
   "description": "API de Delivery Enafood",
   "main": "index.js",
   "scripts": {
+    "start": "node src/api/server.js",
     "test": "mocha src/tests/**/*.test.js --exit",
     "dev": "nodemon ./src/api/server.js"
   },
