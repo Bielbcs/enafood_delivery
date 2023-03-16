@@ -17,7 +17,7 @@ const login = async (req, res, next) => {
     
     const token = createToken(user);
 
-    return res.status(200).json(token);
+    return res.status(200).json({ token });
   } catch (error) {
     next(error);
   }

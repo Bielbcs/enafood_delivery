@@ -13,26 +13,25 @@ const insert = async (prodId, userId) => {
   const product = await Product.findOne({ _id: prodId }).select('-__v');
   const { products } = cart;
   
-  if (products.some((item) => item._id.toString() === prodId)) {
-    throw new HttpException(404, 'Produto já está no carrinho!');
+  const index = products.findIndex((item) => item._id.toString() === prodId);
+
+  if (index !== -1) {
+    products[index].quantity += 1;
   } else {
     products.push({ ...product._doc });
   }
   
-  await cart.save();
+  const savedCart = await cart.save();
 
-  const newCart = await Cart.findOne({user_id: userId});
-
-  return newCart;
+  return savedCart;
 }
 
 const addQuantity = async (prodId, userId, quantity) => {
-  await Cart.updateOne(
+  const updatedCart = await Cart.findOneAndUpdate(
     { user_id: userId, 'products._id': prodId },
-    { $set: { 'products.$.quantity': quantity } }
+    { $set: { 'products.$.quantity': quantity } },
+    { new: true }
   );
-
-  const updatedCart = await Cart.findOne({ user_id: userId });
 
   return updatedCart;
 }

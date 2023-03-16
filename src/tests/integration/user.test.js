@@ -61,7 +61,7 @@ describe('USER', function() {
       const result = await chai.request(app).post('/user/login')
         .send(INSERTED_USER_MOCK);
   
-      expect(result.body).to.be.equals(MOCKED_TOKEN);
+      expect(result.body).to.be.deep.equals({ token: MOCKED_TOKEN });
       expect(result.status).to.be.equals(200);
     })
   });

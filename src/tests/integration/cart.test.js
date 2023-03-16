@@ -47,10 +47,7 @@ describe('CART', function() {
       });
   
       sinon.stub(Cart, 'findOne')
-        .onFirstCall()
-        .resolves({ ...MOCKED_CART, save: sinon.stub().resolves() })
-        .onSecondCall()
-        .resolves(MOCKED_CART_WITH_A_PRODUCT);
+        .resolves({ ...MOCKED_CART, save: sinon.stub().resolves(MOCKED_CART_WITH_A_PRODUCT) })
   
       const result = await chai
         .request(app)
@@ -63,12 +60,12 @@ describe('CART', function() {
   
   describe('PUT /cart/:id/:quantity', function() {
     it('Deve atualizar a quantidade de um produto espeficido', async function() {
-      sinon.stub(Cart, 'updateOne').resolves();
-      sinon.stub(Cart, 'findOne').resolves(MOCKED_CART_WITH_A_PRODUCT);
+      sinon.stub(Cart, 'findOneAndUpdate').resolves(MOCKED_CART_WITH_A_PRODUCT);
+
       const result = await chai
         .request(app)
         .put(`/cart/${MOCKED_RETURNED_PRODUCTS}/10`)
-  
+
       expect(result.status).to.be.equals(201);
       expect(result.body).to.be.deep.equals(MOCKED_CART_WITH_A_PRODUCT);
     });

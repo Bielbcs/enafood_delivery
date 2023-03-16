@@ -3,8 +3,12 @@ const Cart = require('../models/cart.model');
 const md5 = require('md5');
 const HttpException = require('../utils/HttpException');
 
+const ecryptPassword = (pass) => {
+  return md5(pass);
+}
+
 const insert = async (data) => {
-  const pass = md5(data.password);
+  const pass = ecryptPassword(data.password);
 
   const user = await User.findOne({ email: data.email });
   if (user) throw new HttpException(404, 'Usuário já existe');
@@ -18,10 +22,11 @@ const insert = async (data) => {
 
 const getUser = async (data) => {
   const { email } = data;
-  const pass = md5(data.password);
+  const pass = ecryptPassword(data.password);
 
   const user = await User.findOne({ email }).select('password');
-  if (!user || user.password !== pass) throw new HttpException(404, 'Credenciais inválidas');
+  if (!user || user.password !== pass) 
+    throw new HttpException(404, 'Credenciais inválidas');
 
   const checkedUser = await User.findOne({ email }).select('-__v');
 

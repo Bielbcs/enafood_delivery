@@ -11,7 +11,7 @@ const RETURN_PASSWORD = {
 
 const INSERTED_USER_MOCK = {
   username: "teste",
-  email: "Jon Doe",
+  email: "email@teste.com",
   password: "123456"
 }
 
